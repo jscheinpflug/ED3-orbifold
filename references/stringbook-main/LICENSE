@@ -1,0 +1,12 @@
+String notes license
+
+Copyright (c) 2026 Xi Yin
+
+The string notes in this repository, including the PDF, LaTeX source,
+bibliography, style files, and figures, are provided for reading and reference
+only. All rights are reserved except as permitted by applicable law or by
+written permission from the copyright holder.
+
+Original companion notebooks and code under codes/ are licensed separately; see
+codes/LICENSE. External third-party dependency packages used by some notebooks
+are not included in this repository and are not licensed by this repository.
