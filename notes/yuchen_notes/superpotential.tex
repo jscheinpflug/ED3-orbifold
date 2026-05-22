@@ -1,0 +1,396 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,bm,epsf,epsfig,graphicx,hyperref,physics, cleveref, subfig, slashed, stmaryrd, tensor}
+\usepackage[backend=bibtex,natbib,style=numeric-comp,sorting=none, doi=false, isbn=false,url=false]{biblatex}
+\addbibresource{ref}
+\input epsf.sty
+\topmargin -.5cm \textheight 21cm \oddsidemargin -.125cm
+\textwidth 17cm
+\setlength{\parskip}{0.5em}
+
+\usepackage[]{todonotes}
+
+\usepackage[weather, alpine]{ifsym}
+
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+
+\newcommand{\ie}{\begin{equation}\begin{aligned}}
+\newcommand{\fe}{\end{aligned}\end{equation}}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+
+\begin{document}
+
+This is a personal notes on the paper \textbf{[2204.02981]}, where the authors compute D-instanton contributions to the superpotential of moduli fields in the setup of Type II orientifold of a CY3, in absence of RR fluxes. I will be using Sen's convention for string perturbation theory, where an amplitude with $g$ handles, $c$ cross-caps, $b$ boundaries and $M$ external open strings is attached with an extra factor of $2^{-g-(b+c)/2+M/4}$.
+
+\section{Setup: General case}
+
+Let's take the internal CFT to be a general $\mathcal{N}=(2,2)$ SCFT and consider the Type IIB case, where the chiral superfields corresponds to the Kahler moduli. The closed string vertex operators of the moduli fields $u^m, (u^m)^*$ and their superpartners $\psi_\alpha^m, \zeta_{\dot{\alpha}}^m$ are given by
+
+\begin{center}
+\begin{tabular}{cccc}
+\hline \hline
+  Field & Vertex operator & Picture number & $(\bar J,J)$ charge  \\
+    \hline \hline
+   $u^m$ & $V^m=e^{-\phi}e^{-\bar\phi}W^m$ & $(-1,-1)$ & $(-1,1)$ \\
+
+ $(u^{m})^\ast $ & $U^m=e^{-\phi}e^{-\bar\phi}Y^m$ & $(-1,-1)$ & $(1,-1)$ \\
+
+   $\psi^m_\alpha $&$V^m_\alpha=e^{-\phi/2}e^{-\bar\phi}W^{m}_\alpha$ & $(-1,-\frac{1}{2})$ & $(-1,-\frac{1}{2})$ \\
+
+   $\psi'^m_{\dot{\alpha}} $& $V^{\prime m}_{\dot{\alpha}}=
+   e^{-\phi}e^{-\bar\phi/2}W^{\prime m}_{\dot{\alpha}}$ & $(-\frac{1}{2},-1)$ & $(\frac{1}{2},1)$ \\
+
+  $\zeta^m_{\dot{\alpha}}$&$U_{\dot{\alpha}}^{m}=c\bar c e^{-\phi/2} e^{-\bar\phi}Y^{m}_{\dot{\alpha}}$ & $(-1,-\frac{1}{2})$ & $(1,\frac{1}{2})$ \\
+
+   $\zeta'^m_\alpha$& $U^{\prime m}_{\alpha}=c\bar c e^{-\phi} e^{-\bar\phi/2}
+Y^{\prime m}_\alpha$ & $(-\frac{1}{2},-1)$ & $(-\frac{1}{2},-1)$ \\
+    \hline \hline   \end{tabular}
+\end{center}
+where $W^m, Y^m$ are weight $(\frac{1}{2}, \frac{1}{2})$ SC primaries, normalized such that their BPZ inner product are given by $\langle \langle W^m|Y^n\rangle = -\delta^{mn}$. The operators $V_\alpha^m$ is the spacetime SUSY partner of $W^m$, with the OPEs
+\ie
+e^{-\phi / 2} S_\alpha(z) e^{-\phi / 2} e^{-\tilde{\phi}} W_\beta^m(w, \bar{w})=(z-w)^{-1} \varepsilon_{\alpha \beta} e^{-\phi} e^{-\tilde{\phi}} W^m(w, \bar{w})+\cdots,
+\fe
+and so on. Explicitly, the holomorphic component of $W_\alpha^m$ can be constructed by taking the product of 4D spin field $S_\alpha$ with RR ground state $\Theta^m$ of the $(2,2)$ SCFT that's related to $W^m$ by half-step spectral flow.
+
+The orientifold $\Omega_g$ is given by gauging worldsheet parity together with a $\mathbb{Z}_2$ symmetry $g$ of the worldsheet SCFT, with the prescription that the oscillator ground state $|1\rangle$ is odd under $\Omega_g$. We take this $\mathbb{Z}_2$ symmetry to be that sent $e^{-\phi}e^{-\tilde{\phi}}W^m$ to $e^{-\phi}e^{-\tilde{\phi}}Y^m$, hence $V^m, V_\beta^m, (V')_{\dot{\beta}}^m$ are mapped to $-U^m, -(U')_\beta^m, -U_{\dot{\beta}}^m$ respectively. The fields that survives the orientifolds are then
+\ie
+\hat{\phi}_m=\frac{1}{\sqrt{2}}\left(u_m+\left(u_m\right)^*\right), \quad \rho_m^\beta=\frac{1}{\sqrt{2}}\left(\psi_m^\beta+\zeta_m^{\prime \beta}\right), \quad \rho_m^{\dot{\beta}}=\frac{1}{\sqrt{2}}(\zeta_m^{\dot{\beta}}+\psi_m^{\dot{\beta}}),
+\fe
+where $\hat{\phi}_m$ corresponds to the real part of the scalar component of a 4D $\mathcal{N}=1$ chiral superfield. The imaginary part comes from a RR sector operator related to $U^m+V^m$ by two half-step spectral flows.
+
+The D-instanton we are considering corresponds to Dirichlet boundary condition on the 4D spacetime fields $X, \psi, \bar{\psi}$, together with a general boundary condition with
+\ie
+J(z)=\bar{J}(\bar{z}), \quad c e^{-\phi / 2} S_\alpha(z)=-\tilde{c} e^{-\tilde{\phi} / 2} \bar{S}_\alpha(\bar{z}), \quad c e^{-\phi / 2} S_{\dot{\alpha}}(z)=\tilde{c} e^{-\tilde{\phi} / 2} \tilde{S}_{\dot{\alpha}}(\bar{z})
+\fe
+on the real axis of the UHP. As always in the D-instanton perturbation theory, there are 2 additional ghost zero modes in Siegel gauge, $c\partial \xi e^{-2\phi}$ and $c\eta$. Under the orientifold, we take the state $|1\rangle$ corresponding to the boundary identity operator to be odd under $\Omega_g$. This will cause that the ghost zero modes $c\partial \xi e^{-2\phi}$ and $c\eta$ are projected out, and one can use Siegel gauge with no problem. The translational zero modes and their superpartners are then given by the open string vertex operators $ce^{-\phi}\psi^\mu, ce^{-\phi/2}S_{\alpha}$ as usual. In addition, we will focus on the case where the D-instanton is a D-brane wrapping a rigid cycle in CY3, namely there will be no zero modes in the internal BCFT.
+
+In order to cancel tadpoles of the RR vertex operator, one typically also need to introduce D-branes that fills the internal dimensions, whose boundary state will be denoted by $|B_{D\text{p}}\rangle $. We will also assume that there are no zero modes in the internal BCFT of the stretched strings. This is only true for specific configurations of the orientifold plane, as we will see in the $\mathbb{C}^3/\mathbb{Z}_3$ case.
+
+\section{Normalization of orientifolded D-instanton amplitudes}
+
+The normalization of D-instanton amplitude is given by the prescription that 
+\ie
+\int d\mu_\text{inst}\exp(-S_\text{kin}[\Psi_\text{inst}]) = \exp(\mathcal{A}_{\text{ann}}).
+\label{norm}
+\fe
+Namely, the regularized Gaussian part of the OSFT path integral on the D-instanton recovers the regularized annulus diagram with both D-instanton boundary condition. Notably, in this case, there are not enough spacetime supersymmetries to force the RHS to be 1, namely there will be nontrivial contributions from the nonzero modes to the annulus diagram. In the orientifolded theory, the RHS is given by
+\ie
+\exp(\mathcal{A}_{\text{ann}})= \frac{1}{2}\exp\left[\int_0^{\infty} \frac{dt}{2t}(Z_A(t)+Z_M(t))\right],
+\fe
+where the additional factor of $\frac{1}{2}$ comes from the fact that the $U(1)$ gauge group replacing the mode $c\partial \xi e^{-2\phi}, c\eta$ has broken to a discrete $O(1)=\mathbb{Z}_2$ subgroup in the orientifolded theory. $Z_A$, $Z_M$ are the annulus partition function and the M\"obius strip partition function with at least one end attached on the D-instanton, given by
+\ie
+Z_A&=\frac{1}{2}\operatorname{STr}_{\mathcal{H}_\text{inst} \oplus \mathcal{H}_{\text{inst}, \text{D}p}\oplus \mathcal{H}_{\text{D}p, \text{inst}}} \left(\frac{1+(-1)^F}{2}(-1)^{N_{b c}+N_{\beta \gamma}} b_0 c_0 e^{-2 \pi t L_0}\right),\\
+Z_M&=\frac{1}{2}\operatorname{STr}_{\mathcal{H}_\text{inst}}\left(\Omega_g \frac{1+(-1)^F}{2}(-1)^{N_{b c}+N_{\beta \gamma}} b_0 c_0 e^{-2 \pi t L_0}\right),
+\label{Zazm}
+\fe
+respectively. The additional factor of $\frac{1}{2}$ comes from  This integral over $t$ is divergent due to the zero mode contributions in $Z_A, Z_M$, which result in both a large $t$ and small $t$ divergence. These divergences come from distinct physical origins, and we will introduce a cutoff $\delta$ on the $t$ integral to treat them separately. Namely, we express the annulus diagram as
+\ie
+\exp(\mathcal{A}_\text{ann}) = \frac{1}{2}\exp\left[\int_0^\delta\frac{dt}{2t}(Z_A(t)+Z_M(t))+\int_\delta^\infty \frac{dt}{2t}(Z_A(t)+Z_M(t))\right],
+\fe
+where the first term contains UV divergences due to closed string loop, and the second term contains IR divergences due to the open string zero mode exchange. 
+
+\subsubsection*{Regularizing closed string loop}
+
+To regularize the first term,  one can formally rewrite this part of the annulus amplitude in the closed string channel using the modular crossing equation as
+\ie
+\int_0^\delta \frac{dt}{2t}Z_A(t)&=\frac{i}{4}\int_{\delta^{-1}}^\infty d\ell \langle  B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|B_\text{inst} \rangle  + \frac{i}{2}\int_{\delta^{-1}}^\infty d\ell \langle \langle B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|B_{\text{D}p} \rangle \\
+&=\frac{i}{4\pi}\langle  B_\text{inst} | c_0^- b_0^+ \frac{e^{-\pi(L_0+\tilde{L}_0)/\delta}}{L_0+\tilde{L}_0}|B_\text{inst} \rangle + \frac{i}{2\pi}\langle B_\text{inst} | c_0^- b_0^+ \frac{e^{-\pi(L_0+\tilde{L}_0)/\delta}}{L_0+\tilde{L}_0}|B_{\text{D}p} \rangle,
+\fe
+where $|B_\text{inst}\rangle \rangle$ is the boundary state of the D-instanton, and $\ell=t^{-1}$ is the length of the cylinder viewed from the closed string channel. Similarly, this part of the M\"obius strip amplitude can be rewritten as
+\ie
+\int_0^\delta \frac{dt}{2t}Z_M(t)&=\frac{i}{2}\int_{1/(4\delta)}^\infty d\ell \langle B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|\otimes \rangle\\
+&=\frac{i}{2}\int_{1/(4\delta)}^{1/\delta} d\ell \langle B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|\otimes \rangle + \frac{i}{2} \int_{1/(\delta)}^{\infty} d\ell  \langle B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|\otimes \rangle,
+\fe
+where we've used the fact that the closed string cylinder length is given by $1/4t$ due to the folding trick, and $|\otimes \rangle$ is the cross-cap state.\footnote{Note that there are an additional factor of 2 due to the fact that the modular crossing equation for the M\"obius strip systematically takes the form $\mathrm{Tr}(\cdots e^{-2\pi t L_0})=\frac{i}{2t}\langle B_\text{inst} |\cdots e^{-\frac{\pi}{4t}L_0^+}|\otimes \rangle$.} Therefore, the first term in the annulus diagram can be formally rewritten as
+\ie
+\int_0^\delta\frac{dt}{2t}(Z_A+Z_M)&= \frac{i}{4\pi} \langle B_\text{inst} | c_0^- b_0^+ \frac{e^{-\pi(L_0+\tilde{L}_0)/\delta}}{L_0+\tilde{L}_0}|B_\text{inst} \rangle  \\
+&+ \frac{i}{2\pi}\langle B_\text{inst} | c_0^- b_0^+ \frac{e^{-\pi(L_0+\tilde{L}_0)/\delta}}{L_0+\tilde{L}_0}(|B_{\text{D}p} \rangle + |\otimes \rangle) + \frac{i}{2}\int_{(4\delta)^{-1}}^{\delta^{-1}}d\ell\,\langle B_\text{inst} | c_0^- b_0^+ e^{-\pi \ell(L_0+\tilde{L}_0)}|\otimes \rangle.
+\fe
+
+We now claim that the RHS of this equation is finite, hence we can take it to be the regularized version of the LHS. The first term will be free of divergence since it contains a 4-dimensional momentum integral $\int \frac{d^4k}{k^{2}} e^{-\pi k^2/\delta}$, which is regular at the small $k$ region. The second term is also finite due to tadpole cancellation, which ensures that the state $|B_{\text{D}p}\rangle + |\otimes \rangle$ doesn't have any zero mode component. 
+
+This regularization is equivalent to putting a uniform upper bound $1/\epsilon'$ on the $\ell$-integral and take $\epsilon'$ to 0 in the end. Due to that $\ell = t^{-1}$ for the annulus and $\ell = 1/(4t)$ for the Mobius strip, we can therefore regularize the first term in the annulus diagram by
+\ie
+\int_0^\delta\frac{dt}{2t}(Z_A(t)+Z_M(t)) \rightarrow \lim_{\epsilon' \rightarrow 0} \exp\left[\int_{\epsilon'}^{\delta} \frac{dt}{2t}Z_A(t)+\int_{\epsilon'/4}^{\delta} \frac{dt}{2t} Z_M(t)\right].
+\fe
+
+\subsubsection*{Regularizing open string exchange}
+
+Now comes the second term, namely the integral from $\delta$ to $\infty$. The divergences in this term come from open string zero mode exchange, hence it can be treated by deforming the boundary condition such that the open string ground state acquires a nonzero conformal weight $h$. Physically, one can think of this deformation as considering the analogous modes between two D-instantons separated in the 4-dimensional non-compact spacetime. 
+
+From the expression \eqref{Zazm}, one can interpret $Z_A+Z_M$ as a trace over GSO-projected $\Omega_g$-even Siegel gauge states
+\ie 
+Z_A+Z_M&=\mathrm{STr}_\mathcal{H_\text{inst}\oplus \mathcal{H}_\text{inst, Dp}\oplus \mathcal{H}_\text{Dp, inst}}\left(\frac{1+\Omega_g}{2} \frac{1+(-1)^F}{2}b_0 c_0 e^{-2\pi t L_0}\right)\\
+&=\sum_{r} s_r e^{-2\pi t h_r} + \frac{1}{2}\sum_a \tilde{s}_a e^{-2\pi t \tilde{h}_a},
+\fe
+where we added the "M\"obius strip" term $\mathrm{Str}_{\mathcal{H}_\text{inst, Dp}\oplus \mathcal{H}_\text{Dp, inst}}(\Omega_g \cdots)$ which gives 0. On the second line, the first sum is over $L_0$ eigenstates in the NS sector, and the second sum is over $G_0$ eigenstates in the R sector. Since the original supertrace in the first line is over $L_0$ eigenstate, and $G_0^2=L_0$ implies that for each $L_0$ eigenstate there are two distinct $G_0$ eigenstate, there is an additional factor of $\frac{1}{2}$ in the R-sector sum. $s_a, \tilde{s}_a= \pm 1$ is the Grassmann parity of the corresponding string field. 
+
+We then perform the regularization and split the set of modes in two parts, denoted respectively by $'$ and $''$. We demand that the primed set includes all zero modes, the two sets have no overlap nor nonzero kinetic term matrix elements, and the set $'$ satisfies that $\sum_r' s_r+\frac{1}{2}\sum_a'\tilde{s}_a=0$. The second term in the annulus diagram is then given by
+\ie
+\exp\left[\int_\delta^\infty \frac{dt}{2t}(Z_A+Z_M)\right]&=\exp\left[\int_\delta^\infty \frac{dt}{2t}(Z_A''+Z_M'')\right]\exp\left[\int_\delta^\infty \frac{dt}{2t}\left(\sum_r' s_r e^{-2\pi t h_r}+\frac{1}{2}\sum_a'\tilde{s}_a e^{-2\pi t \tilde{h}_a}\right)\right]\\
+&=\exp\left[\int_\delta^\infty \frac{dt}{2t}(Z_A''+Z_M'')\right] \prod_r^{'}(h_r)^{-s_r/2}\prod_a^{'} (\tilde{h}_a)^{-\tilde{s}_a/4}\\
+&=\exp\left[\int_\delta^\infty \frac{dt}{2t}(Z_A''+Z_M'')\right]\mathcal{N}\int \prod_r' d\xi_r \int \prod_a d\tilde{\xi}_a \exp(-S_\text{kin}[\Psi'])
+\fe
+where we have normalized the string field in the primed sector by
+\ie
+|\Psi'\rangle = \sum_r' \xi_r |\varphi_r\rangle + \sum_a' \tilde{\xi}_a |\varphi_a\rangle,
+\fe
+and the string fields are normlized by $\langle \varphi_r|c_0|\varphi_s\rangle = -\delta_{rs}$. The factor $\mathcal{N}$ is such that each bosonic mode in the primed set gets a factor of $(2\pi)^{-1/2}$.
+
+Now we want to express this term purely in terms of the zero mode integrals. In our setup, the only zero modes are given by $ce^{-\phi}\psi^\mu$ in NS sector and $ce^{-\phi/2}S_\alpha$ in R sector, which has $\sum_r s_r + \frac{1}{2}\sum_a \tilde{s}_a = 3$, and hence we must addionally include nonzero modes with $\sum_r s_r + \frac{1}{2}\sum_a \tilde{s}_a =-3$ in the primed set. Let's denote these modes $\zeta_i$ with $L_0[\zeta_i]=y_i$. The second term of the annulus diagram can then be formally rewritten as
+\ie
+\exp\left[\int_\delta^\infty \frac{dt}{2t}\left(Z_A+Z_M-3-\sum_i w_i e^{-2\pi y_i t}\right)\right]\int \prod_{\mu = 0}^3 \frac{d\xi_\mu}{\sqrt{2\pi}} \int \prod_{\alpha = 1}^2 d\chi_\alpha \prod_i y_i^{-w_i/2}.
+\fe
+The exponential is now a finite constant, since the zero modes has been subtracted off. Equivalently, this can be achieved by putting a uniform cutoff $1/\epsilon$ on the $t$-integral while taking $\delta \rightarrow 0$. We can also choose all $h_i$ to be the same $h$, which results in
+\ie
+\exp\left(\mathcal{A}_\text{ann}\right)=\frac{K_0}{2} \int \prod_{\mu = 0}^3 \frac{d\xi_\mu}{\sqrt{2\pi}} \int \prod_{\alpha = 1}^2 d\chi_\alpha,
+\fe
+where
+\ie \label{K0}
+K_0 &= h^{-3/2}\lim_{\delta \rightarrow 0}\lim_{\epsilon \rightarrow 0}\lim_{\epsilon' \rightarrow 0} \exp\left[\int_{\epsilon'}^{1/\epsilon} \frac{dt}{2t}Z_A+\int_{\epsilon'/4}^{1/\epsilon} \frac{dt}{2t}Z_M+3\int_\delta^{1/\epsilon}\frac{dt}{2t}(e^{-2\pi h t}-1)\right]\\
+&= \lim_{\epsilon \rightarrow 0}\lim_{\epsilon' \rightarrow 0} \exp\left[\int_{\epsilon'}^{1/\epsilon} \frac{dt}{2t}Z_A+\int_{\epsilon'/4}^{1/\epsilon} \frac{dt}{2t}Z_M+3\int_0^{1/\epsilon}\frac{dt}{2t}(e^{-2\pi t}-1)\right].
+\fe
+This gives the normalization of the D-instanton measure.
+
+\section{The $\mathbb{C}^3/\mathbb{Z}_3$ orbifold}
+
+Consider the case where the CY3 is given by the $\mathbb{C}^3/\mathbb{Z}_3$ orbifold, where the $\mathbb{Z}_3$ action on the complex coordinates $(z_1, z_2, z_3)$ are given by
+\ie
+(z_1, z_2, z_3) \mapsto (\omega z_1,\omega z_2,\omega z_3),\quad \omega = e^{2\pi i/3}
+\fe
+After resolving the orbifold singularity, the space becomes the total space of the bundle
+\ie
+\mathcal{O}(-3)\rightarrow \mathbb{P}^2,
+\fe
+whose exceptional divisor is $E \sim \mathbb{P}^2$. Since the Hodge number of $\mathbb{P}^2$ is given by $h^{1,0}(E)=h^{2,0}(E)=0$, $E$ is a rigid 4-cycle. The D-instanton in question is given by Euclidean D3-brane wrapping $E$. 
+
+This manifold has 1 K\"ahler modulus and no complex moduli. The complexified K\"ahler moduli space can be parametrized by the modulus
+\ie
+T = T_1+iT_2=\frac{1}{2}\int_{E} J \wedge J +i \int_E C_4,
+\fe
+The $(\frac{1}{2}, \frac{1}{2})$ SC primary $W^m, Y^m$ in this case is given by the $\mathbb{Z}_3$ twisted sector ground state $\Delta = \sigma_1\sigma_2\sigma_3$, where $\sigma_i$ is the $\mathbb{Z}_3$ twist field in the $i$-th complex direction, together with a $\mathbb{Z}_3^2$ twist field $\tilde{\bar{\Delta}}$ in the anti-holomorphic sector. As we have seen, this modulus controls the size of the 4-cycle, while the $C_4$ flux is controlled by a RR sector vertex operator.
+
+\subsection{Orientifold with $z_3\mapsto -z_3$}
+
+There are two configurations of O7-planes that can be put on this geometry. We focus on the one whose $\mathbb{Z}_2$ involution is given by
+\ie
+g: (z_1, z_2, z_3) \mapsto (z_1, z_2, -z_3).
+\fe
+In this case, the O7-plane sits on the fixed point $z_3=0$ of the $\mathbb{Z}_3$ involution. After the resolution, the intersection of the O7-plane and the exceptional divisor $E$ is $\mathbb{P}^1 \subset \mathbb{P}^2$. We also need to add space-filling D7-branes to cancel the RR tadpole. For a O7${}^-$-plane, we need to put 8 D7-branes on it, and the Chern-Paton factor on the D7's will be $SO(8)$. We will test whether this can be made compatible with the absence of 3-7 string zero modes assumed in \textbf{[2204.02981]}.
+
+The spectrum of the 3-3 strings and 3-7 strings before orientifold can be directly obtained from the orbifold description. The 3-3 strings are given by the $\mathbb{Z}_3$-invariant states on a ordinary D(-1)-instanton. One can prove that $\mathrm{STr}_{\mathcal{H}_\text{inst}}(\frac{1+(-1)^F}{2}b_0c_0 e^{-2\pi t L_0})=0$, their contributions enters $K_0$ purely from the M\"obius strip partition function, and the annulus partition function is given purely by the 3-7 strings. We evaluate these two parts in the following.
+
+\subsubsection*{The Annulus}
+
+The annulus partition function is given by
+\ie
+Z_{A} &= \frac{1}{6} \sum_{k=0}^2 \sum_{\alpha, \beta=0}^1 (N_0+N_1\omega^{-k}+N_2\omega^k)Z_{\alpha\beta}^{k}(\tau),
+\fe
+where the sum goes over all Siegel gauge states, and the factor 8 comes from the $SO(8)$ Chan-Paton factor on the D7-branes. The additional factor $(N_0+N_1\omega^{-k}+N_2\omega^k)$ comes from the fact that both the fractional D-instanton Chan-Paton factor and the D7 Chan-Paton factor acquires a phase under $\mathbb{Z}_3$. There are 3 types of D7-branes, whose relative phase between the CP factors of ED3 and D7 are respectively $1, \omega^{-k}$ or $\omega^k$. The multiplicities $N_0, N_1, N_2$ is the number of corresponding type of D7-branes in the D7-brane stack. Physically, closed string tadpole cancellation requires $N_0+N_1+N_2=8$, and the fact that the action $\mathrm{diag}(1^{N_0}, (\omega^{-k})^{N_1}, (\omega^k)^{N_2})\in SO(8)$ requires $N_1=N_2$.
+
+The individual pieces are given by
+\ie \begin{gathered}
+Z_{00}^k = \mathrm{Tr}_{\mathcal{H}^{\text{NS}}_{\text{inst, Dp}}}[g^k(-1)^{N_{bc}+N_{\beta\gamma}} q^{L_0}],\quad Z_{01}^k = \mathrm{Tr}_{\mathcal{H}^{\text{NS}}_{\text{inst, Dp}}}[g^k(-1)^{N_{bc}+N_{\beta\gamma}}(-1)^Fq^{L_0}],\\
+Z_{10}^k= -\frac{1}{2}\mathrm{Tr}_{ \mathcal{H}^{\text{R}}_{\text{inst, Dp}}}[g^k(-1)^{N_{bc}+N_{\beta\gamma}}q^{L_0}],\quad Z_{11}^k = -\frac{1}{2}\mathrm{Tr}_{\mathcal{H}^{\text{R}}_{\text{inst, Dp}}}[g^k(-1)^{N_{bc}+N_{\beta\gamma}} (-1)^F q^{L_0}],
+\end{gathered}\fe
+where $g$ is the $\mathbb{Z}_3$ action on the Hilbert space before orbifolding.
+
+The Hilbert space $\mathcal{H}_\text{inst, Dp}^{\text{NS}}$ is the space of open string states in the NS sector of the internal CFT before the $\mathbb{Z}_3$ projection, and $\mathcal{H}_\text{inst, Dp}^{\text{R}}$ similarly for the R-sector. The 3-brane boundary condition is Dirichlet in both $z_1, z_2, z_3$, the 7-brane is Neumann in $z_1, z_2$ but Dirichlet in $z_3$, the NS sector ground state is given by the product of 8 ND twist fields and a $SO(8)$ spin field $ce^{-\phi}\Sigma_8 S_{\mathbf{s}}$, with conformal weight $1/2$. For the ground state labelled by $\mathbf{s}=(\nu_1,\nu_2,s_1,s_2)\in \{\pm \frac{1}{2}\}^4$, the $(-1)^F$ charge of $ce^{-\phi}\Sigma_8 S_{\mathbf{s}}$ is chosen to be $(2\nu_1)(2\nu_2)(2s_1)(2s_2)$. The R-sector ground state is given by a product of 8 ND twist fields and a $SO(2)$ spin field $ce^{-\phi/2}\Sigma_8 S_{s_3}$, with conformal weight $0$. The $(-1)^F$ charge is chosen to be $2s_3$.
+
+The $\mathbb{Z}_3$ charge on the ground states are given by the following. Under a $\mathbb{Z}_3$ action, the combinations $\psi_i=e^{iH_i}$ transforms as $(\psi_1, \psi_2, \psi_3)\rightarrow (\omega \psi_1, \omega\psi_2, \omega\psi_3)$. In order to preserve spacetime supersymmetry (or equivalently $\mathrm{STr}_{\mathcal{H}_\text{inst}}(\frac{1+(-1)^F}{2}b_0c_0 e^{-2\pi t L_0})=0$), the transformation rule on spin fields should be taken to be
+\ie
+(e^{iH_1/2}, e^{iH_2/2}, e^{iH_3/2})\rightarrow (e^{i\pi/3} e^{iH_1/2}, e^{i\pi/3}e^{iH_2/2}, e^{-2i\pi/3}e^{iH_3/2}).
+\fe
+Therefore, $S_{\mathbf{s}}$ picks up a phase $\omega^{s_1+s_2}$ while $S_{s_3}$ picks up $\omega^{-2s_3}$ under $g$.
+
+It's trivial to see $Z_{01}^k=0$ in the zero mode sector, and the other pieces are computed as following (where $n$ runs over positive integers and $r$ positive half-integers).  
+\ie
+Z_{00}^k = 4q^{\frac{1}{2}}\left(\sum_{s_1,s_2} \omega^{k(s_1+s_2)}\right)&\prod \frac{(1+q^n)^4(1-q^n)^2}{(1-q^r)^4(1+q^r)^2} \\
+&\quad \times\prod \frac{(1+\omega^k q^n)^2(1+\omega^{-k} q^n)^2(1+\omega^k q^r)(1+\omega^{-k}q^r)}{(1-\omega^k q^r)^2(1-\omega^{-k} q^r)^2(1-\omega^k q^n)(1-\omega^{-k} q^n)},
+\fe
+which evaluates to, using the multiplicative notation for Jacobi theta functions,\footnote{We use the convention for theta functions as in the CFT textbook by Sugawara and Eguchi. It's probably the same as in Di Francisco. Namely, $\theta_{00}=\theta_3, \theta_{01}=\theta_4, \theta_{10}=\theta_2, \theta_{11}=-\theta_1$.}
+\ie
+Z_{00}^0 = \frac{\theta_2(q)^4}{\theta_4(q)^4},\quad Z_{00}^{{k\neq 0}}= 2\sin (\tfrac{\pi k}{3}) \frac{\eta(\tau)^3\theta_2(q)^2}{\theta_4(q)^2\theta_3(q)} \frac{\theta_2(\omega^k,q)^2\theta_3(\omega^k,q)}{\theta_4(\omega^k,q)^2\theta_1(\omega^k,q)}.
+\fe
+For $Z_{10}^k$, we have
+\ie
+Z_{10}^k = -\frac{1}{2}\sum_{s_3}\omega^{-2ks_3}&\prod \frac{(1+q^r)^4(1-q^n)^2}{(1-q^r)^4(1+q^n)^2}\\
+&\quad \times\prod \frac{(1+\omega^k q^r)^2(1+\omega^{-k}q^r)^2(1+\omega^k q^n)(1+\omega^{-k}q^n)}{(1-\omega^k q^r)^2(1-\omega^{-k} q^r)^2(1-\omega^k q^n)(1-\omega^{-k}q^n)},
+\fe
+and hence
+\ie
+Z_{10}^0 = -\frac{\theta_3(q)^4}{\theta_4(q)^4},\quad Z_{10}^{k\neq 0}=-2\cos(\tfrac{2\pi k}{3})\tan(\tfrac{\pi k}{3})\frac{\eta(\tau)^3\theta_3(q)^2}{\theta_4(q)^2\theta_2(q)} \frac{\theta_3(\omega^k,q)^2\theta_2(\omega^k,q)}{\theta_4(\omega^k,q)^2\theta_1(\omega^k,q)}.
+\fe
+For $Z_{11}^k$, all the oscillator modes cancel, and one have
+\ie
+Z_{11}^k = -\frac{1}{2}\sum_{s_3}(2s_3)\omega^{-2ks_3}= i\sin \frac{2\pi k}{3}.
+\fe
+Adding all the pieces together, and we finally get
+\ie \label{Za}
+Z_A = -\frac{4}{3}+\frac{3N_0-8}{2\sqrt{3}}\eta(\tau)^3\frac{\theta_2(\omega,q)\theta_3(\omega,q)}{\theta_4(q)^2\theta_4(\omega,q)^2\theta_1(\omega,q)}
+\left[
+\frac{\theta_2(q)^2\theta_2(\omega,q)}{\theta_3(q)}
++
+\frac{\theta_3(q)^2\theta_3(\omega,q)}{\theta_2(q)}
+\right],
+\fe
+where we have used the fact $N_1=N_2$.
+
+\subsubsection*{The M\"obius Strip}
+
+The M\"obius strip partition function is given by
+\ie
+Z_M = \frac{1}{12}\sum_{\alpha, \beta, k} Z_{M,\alpha\beta}^k(\tau)
+\fe
+where the individual pieces are given by
+\ie \begin{gathered}
+Z_{M,00}^k = \mathrm{Tr}_{\mathcal{H}^{\text{NS}}_{\text{inst}}}[g^k\Omega (-1)^{N_{bc}+N_{\beta\gamma}} q^{L_0}],\quad Z_{M,01}^k = \mathrm{Tr}_{\mathcal{H}^{\text{NS}}_{\text{inst}}}[g^k\Omega (-1)^{N_{bc}+N_{\beta\gamma}}(-1)^Fq^{L_0}],\\
+Z_{M,10}^k= -\frac{1}{2}\mathrm{Tr}_{ \mathcal{H}^{\text{R}}_{\text{inst}}}[g^k\Omega(-1)^{N_{bc}+N_{\beta\gamma}}q^{L_0}],\quad Z_{M,11}^k = -\frac{1}{2}\mathrm{Tr}_{\mathcal{H}^{\text{R}}_{\text{inst}}}[g^k\Omega(-1)^{N_{bc}+N_{\beta\gamma}} (-1)^F q^{L_0}],
+\end{gathered}\fe
+and $\Omega$ is the worldsheet parity reversal combined with the $\mathbb{Z}_2$ involution. The $\Omega$ action on oscillator modes can be absorbed into a shift in $\tau$, namely replacing it by $\hat{\tau}=\tau+\frac{1}{2}$, together with a $\mathbb{Z}_2$ charge insertion, under which the oscillators transforms as
+\ie
+(X^\mu, Z^{1,2}, Z^3)\mapsto (-X^\mu, -Z^{1,2}, Z^3),\quad (b,c,\beta,\gamma) \mapsto (b,c,\beta,\gamma)
+\fe
+In the NS-sector, the ground state in $\mathcal{H}_\text{inst}$ is given by $ce^{-\phi}$, which is $\mathbb{Z}_2$-odd and $\mathbb{Z}_3$-neutral. The R-sector ground state are given by $ce^{-\phi/2}S_{\mathbf{s}}$ with $\mathbf{s}=(\nu_1, \nu_2, s_1, s_2, s_3)$. Since the fermionic zero modes corresponding to $X^\mu,Z^1,Z^2$ acquires a minus sign under $\mathbb{Z}_2$, changing chirality in $(\nu_{1,2}, s_{1,2})$ will also change the $\mathbb{Z}_2$ action. Therefore $\mathbb{Z}_2$ acts on $ce^{-\phi/2}S_{\mathbf{s}}$ as a factor $\pm(2\nu_1)(2\nu_2)(2s_1)(2s_2)$ under $\mathbb{Z}_2$. The sign here is arbitrary, and it will not affect the result. The $\mathbb{Z}_3$ phase remains $\omega^{(s_1+s_2-2s_3)}$.
+
+It's then easy to see that $Z_{M,10}^k=0$ due to the cancellation in the R zero-mode trace without the extra $(-1)^F$ insertion. The other pieces are given by the following.
+\ie 
+Z_{M,00}^k = -\hat{q}^{-\frac{1}{2}}&\prod \frac{(1-\hat{q}^r)^4(1-\hat{q}^n)^2}{(1+\hat{q}^n)^4(1+\hat{q}^r)^2}\\
+&\quad \times \prod \frac{(1-\omega^k \hat{q}^r)^2(1-\omega^{-k} \hat{q}^r)^2(1+\omega^k \hat{q}^r)(1+\omega^{-k} \hat{q}^r)}{(1+\omega^k \hat{q}^n)^2(1+\omega^{-k} \hat{q}^n)^2(1-\omega^k \hat{q}^n)(1-\omega^{-k} \hat{q}^n)},
+\fe
+\ie
+Z_{M,01}^k = \hat{q}^{-\frac{1}{2}}&\prod \frac{(1+\hat{q}^r)^4(1-\hat{q}^n)^2}{(1+\hat{q}^n)^4(1-\hat{q}^r)^2}\\
+&\quad \times \prod \frac{(1+\omega^k \hat{q}^r)^2(1+\omega^{-k} \hat{q}^r)^2(1-\omega^k \hat{q}^r)(1-\omega^{-k} \hat{q}^r)}{(1+\omega^k \hat{q}^n)^2(1+\omega^{-k} \hat{q}^n)^2(1-\omega^k \hat{q}^n)(1-\omega^{-k} \hat{q}^n)},
+\fe
+\ie
+Z_{M,11}^k = \mp\frac{1}{2}\sum_{\nu_1,\nu_2,s_1, s_2, s_3}(2s_3)\omega^{k(s_1+s_2-2s_3)}
+\fe
+Rewriting the results in terms of theta functions, one then gets
+\ie \begin{gathered}
+Z_{M,00}^0=-16\frac{\theta_4(\hat{q})^4}{\theta_2(\hat{q})^4},\quad Z_{M,01}^0 = 16 \frac{\theta_3(\hat{q})^4}{\theta_2(\hat{q})^4},\quad Z_{M,11}^0 = 0,\\
+Z_{M,00}^{k\neq 0} = -32 \cos^2 (\tfrac{\pi k}{3})\sin (\tfrac{\pi k}{3}) \frac{\eta(\hat{q})^3\theta_4(\hat{q})^2\theta_4(\omega^k,\hat{q})^2\theta_3(\omega^k,\hat{q})}{\theta_2(\hat{q})^2\theta_3(\hat{q})\theta_2(\omega^k,\hat{q})^2\theta_1(\omega^k,\hat{q})},\\
+Z_{M,01}^{k\neq 0} = 32 \cos^2 (\tfrac{\pi k}{3})\sin (\tfrac{\pi k}{3}) \frac{\eta(\hat{q})^3\theta_3(\hat{q})^2\theta_3(\omega^k,\hat{q})^2\theta_4(\omega^k,\hat{q})}{\theta_2(\hat{q})^2\theta_4(\hat{q})\theta_2(\omega^k,\hat{q})^2\theta_1(\omega^k,\hat{q})},\\
+Z_{M,11}^{k\neq 0} = 16i \cos^2 (\tfrac{\pi k}{3})\sin(\tfrac{2\pi k}{3}).
+\end{gathered}\fe
+Adding everything together, we found
+\ie \label{Zm}
+Z_M = \frac{4}{3}+\frac{2\sqrt{3}}{3}\eta(\hat{q})^3\left[
+\frac{\theta_3(\hat{q})^2\theta_3(\omega,\hat{q})^2\theta_4(\omega,\hat{q})}{\theta_2(\hat{q})^2\theta_4(\hat{q})\theta_2(\omega,\hat{q})^2\theta_1(\omega,\hat{q})}
+-
+\frac{\theta_4(\hat{q})^2\theta_4(\omega,\hat{q})^2\theta_3(\omega,\hat{q})}{\theta_2(\hat{q})^2\theta_3(\hat{q})\theta_2(\omega,\hat{q})^2\theta_1(\omega,\hat{q})}
+\right].
+\fe
+
+\subsubsection*{The factor $K_0$}
+
+The asymptotics of $Z_A, Z_M$ at small and large $t$ are given by the following:
+\ie
+Z_A(t)\sim \frac{3N_0-8}{4\sqrt3}\frac1t-\frac43,\qquad
+Z_M(t/4)\sim \frac{2}{\sqrt3}\frac1t+\frac43,
+\qquad (t\to 0),
+\fe
+\ie
+Z_A(t)\sim -\frac{8-N_0}{4},\qquad
+Z_M(t/4)\sim 3,\qquad (t\to\infty).
+\fe
+
+\textbf{Notably, the small-$t$ divergence can only be cancelled with $N_0=0,N_1=N_2=4$, which produces nonzero number of 3-7 string zero modes. The original formula does not apply.} In this case, one just need to alter $K_0$ to
+\ie 
+\mathcal{K}_0 = \lim_{\epsilon \rightarrow 0}\lim_{\epsilon' \rightarrow 0} \exp\left[\int_{\epsilon'}^{1/\epsilon} \frac{dt}{2t}Z_A+\int_{\epsilon'/4}^{1/\epsilon} \frac{dt}{2t}Z_M+\int_0^{1/\epsilon}\frac{dt}{2t}(e^{-2\pi t}-1)\right].
+\fe
+and add the corresponding 3-7 string zero mode integrals to the instanton measure. The instanton measure can be then computed numerically as
+\ie
+\exp(\mathcal{A}_\text{ann})=\frac{\mathcal{K}_0}{2}\int \frac{d^4\xi_\mu}{\sqrt{2\pi}} \,d^2\chi\, d^4\mu,\quad \mathcal{K}_0\simeq 0.3128633169,
+\fe
+where $\mu$ are the additional 3-7 string zero modes, normalized canonically. The superpotential will be generated not by the simple disk diagrams, but two mixed disk diagrams with two boundary changing operators $\mu$ inserted on each disk.
+
+\subsection{Orientifold with $(z_1,z_2,z_3)\mapsto -(z_1,z_2,z_3)$}
+
+The other configuration of O7${}^-$-plane is given by the $\mathbb{Z}_2$-involution
+\ie
+(z_1,z_2,z_3)\mapsto -(z_1,z_2,z_3),
+\fe
+which will result in a O7-plane and 8 D7-branes wrapping $\mathbb{P}^2$ with $SO(8)$ Chan-Paton factor, and the system will behave as a fractional D(-1)/D3 system in the orbifold limit.
+
+\subsubsection*{The Annulus}
+
+In this setup, the directions $x_\mu$ are Dirichlet-Neumann, and all $z_i$ directions are Dirichlet-Dirichlet. The ground state $\mathcal{H}^\text{NS}_{\text{inst, Dp}}$ is given by the operator $ce^{-\phi}\Sigma_4 S_{\nu_1, \nu_2}$ that's neutral in $\mathbb{Z}_3$, $(2\nu_1)(2\nu_2)$ in $(-1)^F$. The R-sector ground state is given by $ce^{-\phi/2}\Sigma_4 S_{s_1,s_2,s_3}$ with $\mathbb{Z}_3$ charge $\omega^{(s_1+s_2-2s_3)k}$ and $(2s_1)(2s_2)(2s_3)$ in $(-1)^F$. Both the NS and R sector ground states has conformal weight 0.
+
+As always, $Z_{01}^k=0$. The individual pieces are given by
+\ie
+Z_{00}^k = 4\prod \frac{(1+q^n)^4(1-q^n)^2}{(1-q^r)^4(1+q^r)^2} \frac{(1+\omega^k q^r)^3(1+\omega^{-k}q^r)^3}{(1-\omega^kq^n)^3 (1-\omega^{-k}q^n)^3}
+\fe
+\ie
+Z_{10}^k = -\frac{1}{2}\left(\sum_{s_1,s_2,s_3}\omega^{k(s_1+s_2-2s_3)}\right)&\prod \frac{(1+q^r)^4(1-q^n)^2}{(1-q^r)^4(1+q^n)^2}\frac{(1+\omega^k q^n)^3(1+\omega^{-k}q^n)^3}{(1-\omega^kq^n)^3 (1-\omega^{-k}q^n)^3}
+\fe
+\ie
+Z_{11}^k =-\frac{1}{2}\sum_{s_1,s_2,s_3}(2s_1)(2s_2)(2s_3)\omega^{k(s_1+s_2-2s_3)}
+\fe
+and in total,
+\ie
+Z_A = \frac{\sqrt{3}(2N_0-N_1-N_2)}{2}
+\frac{\eta(q)^3}{\theta_4(q)^2\theta_1(\omega,q)^3}
+\left[
+\frac{\theta_2(q)^2\theta_3(\omega,q)^3}{\theta_3(q)}
++
+\frac{\theta_3(q)^2\theta_2(\omega,q)^3}{\theta_2(q)}
+\right]
+-\frac34(N_1-N_2)
+\fe
+where $N_0,N_1,N_2$ are the fractional D7-brane multiplicities.
+
+\subsubsection*{The M\"obius Strip}
+
+For the M\"obius strip partition function, we again redefine $\hat{\tau}=\tau + \frac{1}{2}$, and replace $\Omega$ with the $\mathbb{Z}_2$ charge
+\ie
+(X^\mu, Z^i)\mapsto (-X^\mu, Z^i)
+\fe
+into the supertrace. The NS sector ground state $ce^{-\phi}$ is $\mathbb{Z}_2$-odd, $\mathbb{Z}_3$-neutral, and odd under $(-1)^F$. The R-sector ground state $ce^{-\phi/2}S_\mathbf{s}$ gains a factor $\pm(2\nu_1)(2\nu_2)$ under $\mathbb{Z}_2$, a factor $\omega^{k(s_1+s_2-2s_3)}$ under $\mathbb{Z}_3$, and $\Gamma_{11}$ under $(-1)^F$. 
+
+The individual pieces are given by:
+\ie
+Z_{M,00}^k = -\hat{q}^{-1/2}\prod \frac{(1-\hat{q}^r)^4(1-\hat{q}^n)^2}{(1+\hat{q}^n)^4(1+\hat{q}^r)^2} \frac{(1+\omega^k \hat{q}^r)^3(1+\omega^{-k} \hat{q}^r)^3}{(1-\omega^k \hat{q}^n)^3(1-\omega^{-k} \hat{q}^n)^3},
+\fe
+\ie
+Z_{M,01}^k = \hat{q}^{-1/2}\prod \frac{(1+\hat{q}^r)^4(1-\hat{q}^n)^2}{(1+\hat{q}^n)^4(1-\hat{q}^r)^2} \frac{(1-\omega^k \hat{q}^r)^3(1-\omega^{-k} \hat{q}^r)^3}{(1-\omega^k \hat{q}^n)^3(1-\omega^{-k} \hat{q}^n)^3},
+\fe
+\ie
+Z_{M,11}^k = \mp \frac{1}{2}\sum_{s_1,s_2,s_3}(2s_1)(2s_2)(2s_3)\omega^{k(s_1+s_2-2s_3)},
+\fe
+and hence
+\ie
+Z_M = 2\sqrt3\,\eta(\hat q)^3
+\left[
+\frac{\theta_4(\hat q)^2\theta_3(\omega,\hat q)^3}
+{\theta_2(\hat q)^2\theta_3(\hat q)\theta_1(\omega,\hat q)^3}
++
+\frac{\theta_3(\hat q)^2\theta_4(\omega,\hat q)^3}
+{\theta_2(\hat q)^2\theta_4(\hat q)\theta_1(\omega,\hat q)^3}
+\right].
+\fe
+
+\subsubsection*{The factor $K_0$}
+
+The asymptotics of $Z_A, Z_M$ at small and large $t$ are given by the following:
+\ie
+Z_A(t)\sim \frac{\sqrt3(2N_0-N_1-N_2)}{4}\frac1t-\frac34(N_1-N_2),\qquad
+Z_M(t/4)\sim -\frac{2\sqrt3}{t},
+\qquad (t\to 0),
+\fe
+\ie
+Z_A(t)\sim \frac32(N_0-N_1),\qquad
+Z_M(t/4)\sim 3,\qquad (t\to\infty).
+\fe
+\textbf{[What's the physical $(N_0, N_1, N_2)$? $N_0+N_1+N_2=8$ does not give any solution]}
+
+\section*{Other stuffs to do}
+
+% Agents: Don't touch anything in this section.
+\begin{enumerate}
+  \item 1-loop Kahler potential in terms of CY spectrum data, string loops to non-compact CY cones. [BHK '04, 0508043, BHP '06][1308.2157]: Extract from 0-pt amplitudes with specific spin structure?
+  \item Warping corrections in KS from worldsheet (singular conifold + ND3/MD5), starting from conifold + RR flux/warping deformation, find SFT solution? -- Need full spectrum of the singular conifold CFT, take limit where CFT reduces to $\mathcal{N}=2$ Liouville?
+\end{enumerate}
+
+\end{document}
